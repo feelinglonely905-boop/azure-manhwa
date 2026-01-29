@@ -5,9 +5,38 @@
   <title>Azure Manhwa</title>
   <meta name="description" content="Azure Manhwa - Baca manhwa, manhua, manga gratis">
   <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#0b0f14;color:white;font-family:sans-serif">
-  <h1 style="color:#4fc3ff">AZURE MANHWA</h1>
-  <p>Website sedang disiapkan 💙</p>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <h1 class="logo glow">AZURE MANHWA</h1>
+  <input type="text" id="search" placeholder="Cari manhwa...">
+</header>
+
+<!-- FILTER GENRE -->
+<div class="genre-bar">
+  <button onclick="filterGenre('All')">All</button>
+  <button onclick="filterGenre('Action')">Action</button>
+  <button onclick="filterGenre('Romance')">Romance</button>
+  <button onclick="filterGenre('Fantasy')">Fantasy</button>
+  <button onclick="filterGenre('Isekai')">Isekai</button>
+  <button onclick="filterGenre('Horror')">Horror</button>
+</div>
+
+<!-- LIST KOMIK -->
+<main id="comic-list" class="grid"></main>
+
+<footer class="footer">
+  <a href="https://t.me/+Yi-oZzIE-bplZWE9" target="_blank">Telegram</a> |
+  <a href="https://www.tiktok.com/@shereebourgade?_r=1&_t=ZS-93RrBOaIpov" target="_blank">TikTok</a>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
 </body>
-</html>
+  </html>
+  
