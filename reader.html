@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Reader | Azure Manhwa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.reader img {
+  width: 100%;
+  display: block;
+}
+.reader-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #0f1620;
+  position: sticky;
+  top: 0;
+}
+.reader-nav button {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+</style>
+</head>
+<body>
+
+<div class="reader-nav">
+  <button onclick="prevChapter()">◀ Prev</button>
+  <button onclick="showChapters()">📑 Chapters</button>
+  <button onclick="nextChapter()">Next ▶</button>
+</div>
+
+<div id="reader" class="reader"></div>
+
+<script src="js/data.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const comicId = params.get("comic");
+let chapterNum = parseInt(params.get("chapter"));
+
+const comic = comics.find(c => c.id === comicId);
+const chapter = comic.chapters.find(c => c.chapter === chapterNum);
+const reader = document.getElementById("reader");
+
+chapter.images.forEach(img => {
+  reader.innerHTML += `<img src="${img}">`;
+});
+
+function prevChapter() {
+  if (chapterNum > 1) {
+    location.href = `reader.html?comic=${comicId}&chapter=${chapterNum - 1}`;
+  }
+}
+
+function nextChapter() {
+  if (chapterNum < comic.chapters.length) {
+    location.href = `reader.html?comic=${comicId}&chapter=${chapterNum + 1}`;
+  }
+}
+
+function showChapters() {
+  let list = comic.chapters.map(c =>
+    `Chapter ${c.chapter}`
+  ).join("\n");
+  alert(list);
+}
+</script>
+</body>
+                                          </html>
+  
