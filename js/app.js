@@ -9,6 +9,9 @@ function render(data) {
         <img src="${c.cover}">
         <h3>${c.title}</h3>
       </div>
+      function openComic(id) {
+  window.location.href = `reader.html?comic=${id}&chapter=1`;
+               }
     `;
   });
 }
@@ -26,3 +29,7 @@ function filterGenre(g) {
   if (g === "All") return render(comics);
   render(comics.filter(c => c.genre === g));
                         }
+function openComic(id) {
+  window.location.href = `reader.html?comic=${id}&chapter=1`;
+  }
+  
