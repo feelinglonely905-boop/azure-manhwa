@@ -32,4 +32,21 @@ function filterGenre(g) {
 function openComic(id) {
   window.location.href = `reader.html?comic=${id}&chapter=1`;
   }
-  
+  function openSupport() {
+  document.getElementById("support-popup").classList.remove("hidden");
+}
+
+function closeSupport() {
+  document.getElementById("support-popup").classList.add("hidden");
+}
+
+function playSupport() {
+  for (let i = 0; i < 15; i++) {
+    const heart = document.createElement("span");
+    heart.innerHTML = "💙";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
