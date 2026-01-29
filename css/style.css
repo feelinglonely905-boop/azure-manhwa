@@ -163,4 +163,15 @@ body {
     opacity: 0;
   }
   }
-  
+  .section {
+  padding: 10px;
+}
+.section h2 {
+  margin: 10px 0;
+}
+.card small {
+  display: block;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 0 8px 8px;
+}
