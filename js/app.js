@@ -1,52 +1,51 @@
-const list = document.getElementById("comic-list");
+const comicList = document.getElementById("comic-list");
+const updateList = document.getElementById("update-list");
+const newList = document.getElementById("new-list");
 const search = document.getElementById("search");
 
-function render(data) {
-  list.innerHTML = "";
-  data.forEach(c => {
-    list.innerHTML += `
-      <div class="card">
-        <img src="${c.cover}">
-        <h3>${c.title}</h3>
-      </div>
-      function openComic(id) {
-  window.location.href = `reader.html?comic=${id}&chapter=1`;
-               }
-    `;
-  });
+function card(c) {
+  return `
+  <div class="card" onclick="openComic('${c.id}')">
+    <img src="${c.cover}">
+    <h3>${c.title}</h3>
+    <small>${c.genre} • ${c.chapters.length} Ch</small>
+  </div>
+  `;
 }
 
-render(comics);
-
-// SEARCH
-search.addEventListener("input", () => {
-  const val = search.value.toLowerCase();
-  render(comics.filter(c => c.title.toLowerCase().includes(val)));
-});
-
-// FILTER
-function filterGenre(g) {
-  if (g === "All") return render(comics);
-  render(comics.filter(c => c.genre === g));
-                        }
 function openComic(id) {
-  window.location.href = `reader.html?comic=${id}&chapter=1`;
-  }
-  function openSupport() {
-  document.getElementById("support-popup").classList.remove("hidden");
+  location.href = `reader.html?comic=${id}&chapter=1`;
 }
 
-function closeSupport() {
-  document.getElementById("support-popup").classList.add("hidden");
+/* SEMUA KOMIK */
+function renderAll(data) {
+  comicList.innerHTML = data.map(card).join("");
 }
 
-function playSupport() {
-  for (let i = 0; i < 15; i++) {
-    const heart = document.createElement("span");
-    heart.innerHTML = "💙";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.getElementById("hearts").appendChild(heart);
-
-    setTimeout(() => heart.remove(), 2000);
-  }
+/* NEW MANHWA (URUT DARI PALING BARU) */
+function renderNew() {
+  const sorted = [...comics].sort((a,b)=> 
+    new Date(b.update) - new Date(a.update)
+  );
+  newList.innerHTML = sorted.slice(0,6).map(card).join("");
 }
+
+/* NEW CHAPTER UPDATE */
+function renderUpdate() {
+  const sorted = [...comics].sort((a,b)=> 
+    new Date(b.update) - new Date(a.update)
+  );
+  updateList.innerHTML = sorted.slice(0,6).map(card).join("");
+}
+
+renderAll(comics);
+renderNew();
+renderUpdate();
+
+/* SEARCH */
+search.addEventListener("input", () => {
+  const v = search.value.toLowerCase();
+  renderAll(
+    comics.filter(c => c.title.toLowerCase().includes(v))
+  );
+});
